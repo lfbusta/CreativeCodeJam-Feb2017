@@ -1,6 +1,6 @@
 local STI = require "libs.STI"
 local bump = require "bump"
-local room = require "..res.maps.house"
+local room = require "..res.maps.coop_level"
 local player = require("player") --adds player class
 
 require "collision"
@@ -8,6 +8,10 @@ require "collision"
 local world = bump.newWorld()
 local worldWidth = love.graphics.getWidth()
 local worldHeight = love.graphics.getHeight()
+
+local playerX = 160
+local playerY = 360
+local playerspeed = 80
 
 local scale = 2
 local tilelength = 32
@@ -22,10 +26,10 @@ end
 
 function love.load()
 	-- load map file
-	map = STI.new("res/maps/house.lua", {"box2d"})
-  collisions(world,house,map,tilelength)
+	map = STI.new("res/maps/coop_level.lua", {"box2d"})
+  collisions(world,room,map,tilelength)
 
-  local booboo = love.graphics.newImage("res/images/booboosheet.png")
+  local booboo = love.graphics.newImage("res/maps/images/booboosheet.png")
   booboo:setFilter( 'nearest', 'nearest' )    --Scales image so that pixels are sharp
   player = player:new(booboo,playerspeed,playerX,playerY,18,28,8,4)		--instatiates booboo sprite
 

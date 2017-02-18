@@ -65,7 +65,8 @@ function player:new(image,speed,x,y,w,h,xoff,yoff)
       right = 'right',
       left = 'left',
       up = "up",
-      control = true
+      control = true,
+      dialoguebox = {x = x, y = y + h, w = w, h = h} --defines area which player can interact with
 
     }
 
