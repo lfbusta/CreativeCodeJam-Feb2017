@@ -22,4 +22,21 @@ dialogue.basket = {
   question = false
 }
 
+dialogue.drawer = {
+  lines = {
+    "You put the hat in the drawer.",
+    "You see some math homework."
+  },
+  question = false
+}
+
+dialogue.bin = {
+  lines = {
+    "You throw the math away.",
+    "You see some petshops in the bin.",
+    "You wonder why they are there..."
+  },
+  question = false
+}
+
 return dialogue

@@ -25,7 +25,7 @@ function comment:new(lines)
     messageBox = {xoff = -wwidth/4 + 30, yoff = wheight/8, w = messageBoxW, h = messageBoxH},
     textoffx = 20,
     textLimit = messageBoxW - 40,
-
+    canStart = false,
     done = false
   }
 

@@ -48,7 +48,7 @@ function NPC:turn(dir)
 end
 
 function NPC:comment(player,key)
-  if key == "space" and checkcollision(player.dialoguebox, self.dialoguebox) and self.dialogue.done == false then
+  if key == "space" and checkcollision(player.dialoguebox, self.dialoguebox) and self.dialogue.done == false and self.dialogue.canStart then
     self.dialogue.start = true
     player.control = false
     --if player presses space before message is typed out message automatically is typed

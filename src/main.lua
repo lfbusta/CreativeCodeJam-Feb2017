@@ -26,6 +26,8 @@ local playerspeed = 80
 local scale = 2
 local tilelength = 32
 
+
+
 --returns true if a collision between box1 and 2 occurs
 function checkcollision(box1, box2)
   return box1.x < box2.x + box2.w and
@@ -48,6 +50,35 @@ function defineObjects(map)
         object.properties.width,
         object.properties.height,
         basketdialogue
+      )
+      basket.dialogue.canStart = true
+		end
+
+    if object.name == "Drawer" then
+			drawerdialogue = dialogue.drawer
+			drawer = NPC:new(
+        object.x,
+        object.y,
+        NPCspeed,
+        object.properties.offsetx,
+        object.properties.offsety,
+        object.properties.width,
+        object.properties.height,
+        drawerdialogue
+      )
+		end
+
+    if object.name == "Bin" then
+			bindialogue = dialogue.bin
+			bin = NPC:new(
+        object.x,
+        object.y,
+        NPCspeed,
+        object.properties.offsetx,
+        object.properties.offsety,
+        object.properties.width,
+        object.properties.height,
+        bindialogue
       )
 		end
 
@@ -101,6 +132,8 @@ function love.update(dt)
   player:updateinstance(dt)
 
   basket.dialogue:textUpdate(dt)
+  drawer.dialogue:textUpdate(dt)
+  bin.dialogue:textUpdate(dt)
 
   --update character position based on where player moves
 	--redefines player's collision box for dialogue depending on which way he faces
@@ -121,14 +154,27 @@ function love.update(dt)
 	end
 	move(world,player,dx,dy)
 
+  checkForGameUpdates()
+
   if(love.keyboard.isDown('escape')) then
       love.event.quit()
   end
 
 end
 
+function checkForGameUpdates()
+  if basket.dialogue.done then
+    drawer.dialogue.canStart = true
+  end
+  if drawer.dialogue.done then
+    bin.dialogue.canStart = true
+  end
+end
+
 function love.keyreleased(key)
   basket:speak(player,key)
+  drawer:speak(player,key)
+  bin:speak(player,key)
 
 --puts character in idle state if player releases walking keys.
 	if player.control then
@@ -157,6 +203,9 @@ function love.draw()
   -- Draw player
   player:drawinstance()
   basket.dialogue:textDraw(player)
+  drawer.dialogue:textDraw(player)
+  bin.dialogue:textDraw(player)
+
   map:drawLayer(map.layers["Foreground"])
   map:drawLayer(map.layers["Foreground 2"])
 
