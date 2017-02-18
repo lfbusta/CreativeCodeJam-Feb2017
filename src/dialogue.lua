@@ -17,14 +17,14 @@ dialogue.emily = {
 
 dialogue.basket = {
   lines = {
-    "You got a hat!"
+    "You got a pink hat!"
   },
   question = false
 }
 
 dialogue.drawer = {
   lines = {
-    "You put the hat in the drawer.",
+    "You put the pink hat in the drawer.",
     "You see some math homework."
   },
   question = false
@@ -32,9 +32,9 @@ dialogue.drawer = {
 
 dialogue.bin = {
   lines = {
-    "You throw the math away.",
+    "You throw the homework away.",
     "You see some petshops in the bin.",
-    "You wonder why they are there..."
+    "Why are they there..?"
   },
   question = false
 }
