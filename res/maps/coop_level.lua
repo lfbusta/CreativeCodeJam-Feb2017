@@ -8,7 +8,7 @@ return {
   height = 10,
   tilewidth = 32,
   tileheight = 32,
-  nextobjectid = 6,
+  nextobjectid = 8,
   properties = {},
   tilesets = {
     {
@@ -106,7 +106,7 @@ return {
         43, 0, 0, 0, 0, 0, 0, 0, 0, 45,
         43, 0, 0, 0, 0, 0, 0, 0, 0, 45,
         43, 0, 0, 0, 0, 0, 0, 0, 84, 45,
-        43, 0, 0, 0, 0, 0, 0, 0, 94, 45,
+        43, 0, 0, 0, 0, 0, 0, 0, 0, 45,
         43, 0, 0, 0, 0, 0, 0, 0, 0, 45,
         43, 0, 0, 0, 0, 0, 0, 0, 0, 45,
         53, 54, 54, 54, 54, 54, 54, 54, 54, 55
@@ -133,7 +133,12 @@ return {
           rotation = 0,
           gid = 150,
           visible = true,
-          properties = {}
+          properties = {
+            ["height"] = 19,
+            ["offsetx"] = 7,
+            ["offsety"] = 8,
+            ["width"] = 19
+          }
         },
         {
           id = 5,
@@ -147,7 +152,50 @@ return {
           rotation = 0,
           gid = 146,
           visible = true,
-          properties = {}
+          properties = {
+            ["height"] = 32,
+            ["offsetx"] = 0,
+            ["offsety"] = 0,
+            ["width"] = 32
+          }
+        },
+        {
+          id = 6,
+          name = "Drawer",
+          type = "",
+          shape = "rectangle",
+          x = 256,
+          y = 224,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 94,
+          visible = true,
+          properties = {
+            ["height"] = 32,
+            ["offsetx"] = 0,
+            ["offsety"] = 0,
+            ["width"] = 32
+          }
+        },
+        {
+          id = 7,
+          name = "Bin",
+          type = "",
+          shape = "rectangle",
+          x = 32,
+          y = 288,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 160,
+          visible = true,
+          properties = {
+            ["height"] = 22,
+            ["offsetx"] = 9,
+            ["offsety"] = 5,
+            ["width"] = 15
+          }
         }
       }
     },
