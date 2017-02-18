@@ -24,7 +24,9 @@ function comment:new(lines)
     isQuestion = false,
     messageBox = {xoff = -wwidth/4 + 30, yoff = wheight/8, w = messageBoxW, h = messageBoxH},
     textoffx = 20,
-    textLimit = messageBoxW - 40
+    textLimit = messageBoxW - 40,
+
+    done = false
   }
 
   setmetatable(o, self)
@@ -47,6 +49,7 @@ end
 end
 
 function comment:textDraw(player)
+--[[
   if self.start then
     love.graphics.setColor(255,255,255,255)
     love.graphics.rectangle("fill", player.x + self.messageBox.xoff, player.y + self.messageBox.yoff, self.messageBox.w, self.messageBox.h,2,2)
@@ -61,6 +64,34 @@ function comment:textDraw(player)
 
     love.graphics.printf(printedText, player.x + self.messageBox.xoff + self.textoffx, player.y + self.messageBox.yoff + startHeight, self.textLimit, "left")
     love.graphics.rectangle("line",player.x + self.messageBox.xoff, player.y + self.messageBox.yoff, self.messageBox.w, self.messageBox.h,2,2)
+  end
+  ]]
+  if self.start then
+    wwidth = love.graphics.getWidth()
+    wheight = love.graphics.getHeight()
+
+    msgBoxW = 250
+    msgBoxH = 45
+    xPos = (wwidth/2 - msgBoxW)/2
+    yPos = 230
+    txtLimit = 200
+    txtoffset = (msgBoxW - txtLimit)/2
+
+    love.graphics.setColor(255,255,255,255)
+    love.graphics.rectangle("fill", xPos, yPos, msgBoxW, msgBoxH, 2,2)
+
+    love.graphics.setColor(0,0,0,255)
+    love.graphics.rectangle("line", xPos, yPos, msgBoxW, msgBoxH, 2,2)
+
+    printedText = string.sub(self.lines[self.curr_line],0,self.curr_let)
+
+    --finding start height of text
+    totalWidth = font:getWidth(self.lines[self.curr_line])
+    totalHeight = math.ceil(totalWidth/txtLimit)*font:getHeight(self.lines[self.curr_line])
+    startHeight = (msgBoxH - totalHeight)/2
+
+    love.graphics.printf(printedText, xPos + txtoffset, yPos + startHeight, txtLimit, "left")
+
   end
 end
 

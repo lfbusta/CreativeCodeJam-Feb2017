@@ -48,7 +48,7 @@ function NPC:turn(dir)
 end
 
 function NPC:comment(player,key)
-  if key == "space" and checkcollision(player.dialoguebox, self.dialoguebox) then
+  if key == "space" and checkcollision(player.dialoguebox, self.dialoguebox) and self.dialogue.done == false then
     self.dialogue.start = true
     player.control = false
     --if player presses space before message is typed out message automatically is typed
@@ -62,6 +62,7 @@ function NPC:comment(player,key)
       if self.dialogue.curr_line > self.dialogue.numberofLines then
         self.dialogue.start = false
         self.dialogue.curr_line = 1
+        self.dialogue.done = true
         player.control = true
       end
       self.dialogue.curr_linelen = string.len(self.dialogue.lines[self.dialogue.curr_line])
