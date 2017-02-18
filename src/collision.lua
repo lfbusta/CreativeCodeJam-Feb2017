@@ -1,7 +1,10 @@
 
 function findxy(index,width,tilelength)
 	row = math.floor(index/width)
-	col = math.fmod(index,width) - 1
+	col = math.fmod(index, width) - 1
+	if col == -1 then
+		col = 9
+	end
 	return {xpos = col*tilelength, ypos = row*tilelength}
 end
 
@@ -15,6 +18,9 @@ function collisions(world,house,map,tilelength)
   					tiley = findxy(i,layer.width,tilelength).ypos
   					block = {x = tilex, y = tiley, w = tilelength, h = tilelength}
   					world:add(block, block.x, block.y, block.w, block.h)
+						if tile == 45 then
+							print(i, block.x, block.y)
+						end
   				end
   			end
   		end

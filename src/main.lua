@@ -27,8 +27,9 @@ end
 function love.load()
 	-- load map file
 	map = STI.new("res/maps/coop_level.lua", {"box2d"})
-  collisions(world,room,map,tilelength)
 
+  collisions(world,room,map,tilelength)
+  print("collisions done")
   local booboo = love.graphics.newImage("res/sprites/booboosheet.png")
   booboo:setFilter( 'nearest', 'nearest' )    --Scales image so that pixels are sharp
   player = player:new(booboo,playerspeed,playerX,playerY,18,28,8,4)		--instatiates booboo sprite
