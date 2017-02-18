@@ -27,19 +27,19 @@ function collisions(world,house,map,tilelength)
     NPCoffsety = 2
     NPCw = 20
     NPCh = 30
-
+--[[
   --collisions for NPCs. Need custom widths!
   	for k, object in pairs(map.objects) do
   		NPC = {x = object.x+NPCoffsetx, y = object.y+NPCoffsety, w = NPCw, h = NPCh}
   		world:add(NPC, NPC.x, NPC.y-tilelength, NPC.w, NPC.h)
   	end
+]]
 
---[[
 		for k, object in pairs(map.objects) do
-  		NPC = {x = object.x + object.properties.xoffset, y = object.y + object.properties.yoffset, w = object.properties.width, h = object.properties.height}
+  		NPC = {x = object.x + object.properties.offsetx, y = object.y + object.properties.offsety, w = object.properties.width, h = object.properties.height}
   		world:add(NPC, NPC.x, NPC.y-tilelength, NPC.w, NPC.h)
 		end
-		]]
+
 end
 
 function move(world,player,dx,dy)
