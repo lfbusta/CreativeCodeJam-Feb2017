@@ -15,20 +15,11 @@ dialogue.emily = {
   question = true
 }
 
-dialogue.catherine = {
-  lines = {
-    "Won my leetal!",
-    "You are so precious my Boobooru desu ka. Do you know how much I love this?"
-  },
-  question = false
-}
-
 dialogue.basket = {
   lines = {
     "You got a hat!"
   },
   question = false
 }
-
 
 return dialogue

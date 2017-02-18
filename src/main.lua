@@ -19,7 +19,7 @@ local world = bump.newWorld()
 local worldWidth = love.graphics.getWidth()
 local worldHeight = love.graphics.getHeight()
 
-local playerX = 80
+local playerX = 100
 local playerY = 80
 local playerspeed = 80
 
@@ -37,16 +37,26 @@ end
 --defines Emily as an NPC from data from the map. Will update when spritesheet comes
 function defineObjects(map)
 	for k, object in pairs(map.objects) do
---[[
 		if object.name == "Basket" then
-			basketComment = dialogue.basket
-			basket = NPC:new(object.x,object.y,NPCspeed,object.properties.xoffset, object.properties.xoffset, object.properties.width, object.properties.height, basketdialogue)
+			basketdialogue = dialogue.basket
+			basket = NPC:new(
+        object.x,
+        object.y,
+        NPCspeed,
+        object.properties.offsetx,
+        object.properties.offsety,
+        object.properties.width,
+        object.properties.height,
+        basketdialogue
+      )
 		end
-]]
+
+--[[
     if object.name == "Basket" then
       basketdialogue = dialogue.basket
       basket = NPC:new(object.x,object.y,NPCspeed,NPCoffsetx,NPCoffsety,NPCw,NPCh,basketdialogue)
     end
+]]
 --[[
     if object.name == "Bin" then
       catherinedialogue = dialogue.catherine
@@ -71,7 +81,6 @@ function love.load()
 	map = STI.new("res/maps/coop_level.lua", {"box2d"})
 
   collisions(world,room,map,tilelength)
-  print("collisions done")
   local booboo = love.graphics.newImage("res/sprites/booboosheet.png")
   booboo:setFilter( 'nearest', 'nearest' )    --Scales image so that pixels are sharp
   player = player:new(booboo,playerspeed,playerX,playerY,18,28,8,4)		--instatiates booboo sprite
@@ -149,6 +158,8 @@ function love.draw()
   player:drawinstance()
   basket.dialogue:textDraw(player)
   map:drawLayer(map.layers["Foreground"])
+  map:drawLayer(map.layers["Foreground 2"])
+
 end
 
 function love.quit()
