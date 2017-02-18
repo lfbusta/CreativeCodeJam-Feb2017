@@ -52,6 +52,18 @@ function defineObjects(map)
         basketdialogue
       )
       basket.dialogue.canStart = true
+
+      basketEnddialogue = dialogue.basketEnd
+      basketEnd = NPC:new(
+        object.x,
+        object.y,
+        NPCspeed,
+        object.properties.offsetx,
+        object.properties.offsety,
+        object.properties.width,
+        object.properties.height,
+        basketEnddialogue
+      )
 		end
 
     if object.name == "Drawer" then
@@ -134,6 +146,7 @@ function love.update(dt)
   basket.dialogue:textUpdate(dt)
   drawer.dialogue:textUpdate(dt)
   bin.dialogue:textUpdate(dt)
+  basketEnd.dialogue:textUpdate(dt)
 
   --update character position based on where player moves
 	--redefines player's collision box for dialogue depending on which way he faces
@@ -169,12 +182,16 @@ function checkForGameUpdates()
   if drawer.dialogue.done then
     bin.dialogue.canStart = true
   end
+  if bin.dialogue.done then
+    basketEnd.dialogue.canStart = true
+  end
 end
 
 function love.keyreleased(key)
   basket:speak(player,key)
   drawer:speak(player,key)
   bin:speak(player,key)
+  basketEnd:speak(player,key)
 
 --puts character in idle state if player releases walking keys.
 	if player.control then
@@ -205,6 +222,7 @@ function love.draw()
   basket.dialogue:textDraw(player)
   drawer.dialogue:textDraw(player)
   bin.dialogue:textDraw(player)
+  basketEnd.dialogue:textDraw(player)
 
   map:drawLayer(map.layers["Foreground"])
   map:drawLayer(map.layers["Foreground 2"])

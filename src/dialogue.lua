@@ -38,5 +38,12 @@ dialogue.bin = {
   },
   question = false
 }
+dialogue.basketEnd = {
+  lines = {
+    "You put the petshops in the basket.",
+    "Everything is in its place now!"
+  },
+  question = false
+}
 
 return dialogue
