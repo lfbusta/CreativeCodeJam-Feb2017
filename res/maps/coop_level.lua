@@ -18,7 +18,7 @@ return {
       tileheight = 32,
       spacing = 0,
       margin = 0,
-      image = "images/tileset.png",
+      image = "../images/tileset.png",
       imagewidth = 320,
       imageheight = 640,
       tileoffset = {
@@ -95,7 +95,9 @@ return {
       opacity = 1,
       offsetx = 0,
       offsety = 0,
-      properties = {},
+      properties = {
+        ["collidable"] = true
+      },
       encoding = "lua",
       data = {
         33, 34, 34, 34, 34, 34, 34, 34, 34, 35,
