@@ -2,8 +2,18 @@ local STI = require "libs.STI"
 local bump = require "bump"
 local room = require "..res.maps.coop_level"
 local player = require("player") --adds player class
+local question = require("question") --adds question class
+local comment = require("comment") --adds comment class
+local NPC = require("NPC") --adds NPC class
+local dialogue = require("dialogue")
 
 require "collision"
+
+local NPCspeed = 80
+local NPCoffsetx = 5
+local NPCoffsety = 2
+local NPCw = 20
+local NPCh = 30
 
 local world = bump.newWorld()
 local worldWidth = love.graphics.getWidth()
@@ -24,6 +34,38 @@ function checkcollision(box1, box2)
          box2.y < box1.y + box1.h
 end
 
+--defines Emily as an NPC from data from the map. Will update when spritesheet comes
+function defineObjects(map)
+	for k, object in pairs(map.objects) do
+--[[
+		if object.name == "Basket" then
+			basketComment = dialogue.basket
+			basket = NPC:new(object.x,object.y,NPCspeed,object.properties.xoffset, object.properties.xoffset, object.properties.width, object.properties.height, basketdialogue)
+		end
+]]
+    if object.name == "Basket" then
+      basketdialogue = dialogue.basket
+      basket = NPC:new(object.x,object.y,NPCspeed,NPCoffsetx,NPCoffsety,NPCw,NPCh,basketdialogue)
+    end
+--[[
+    if object.name == "Bin" then
+      catherinedialogue = dialogue.catherine
+      catherine = NPC:new(object.x,object.y,NPCspeed,NPCoffsetx,NPCoffsety,NPCw,NPCh,catherinedialogue)
+    end
+
+    if object.name == "Christopher" then
+			christopherdialogue = dialogue.christopher
+			christopher = NPC:new(object.x,object.y,NPCspeed,NPCoffsetx,NPCoffsety,NPCw,NPCh,christopherdialogue)
+		end
+
+    if object.name == "Mark" then
+      markdialogue = dialogue.mark
+      mark = NPC:new(object.x,object.y,NPCspeed,NPCoffsetx,NPCoffsety,NPCw,NPCh,markdialogue)
+    end
+]]
+	end
+end
+
 function love.load()
 	-- load map file
 	map = STI.new("res/maps/coop_level.lua", {"box2d"})
@@ -41,12 +83,15 @@ function love.load()
     player.w,
     player.h) --adds player as collidable object in world
 
+  defineObjects(map)
 end
 
 function love.update(dt)
 	-- Update world
 	map:update(dt)
   player:updateinstance(dt)
+
+  basket.dialogue:textUpdate(dt)
 
   --update character position based on where player moves
 	--redefines player's collision box for dialogue depending on which way he faces
@@ -74,6 +119,8 @@ function love.update(dt)
 end
 
 function love.keyreleased(key)
+  basket:speak(player,key)
+
 --puts character in idle state if player releases walking keys.
 	if player.control then
 	  if key == player.down then
@@ -89,6 +136,7 @@ function love.keyreleased(key)
 	     player:standup()
 	  end
 	end
+
 end
 
 function love.draw()
@@ -99,6 +147,7 @@ function love.draw()
   map:setDrawRange(5, 5, 256, 256)
   -- Draw player
   player:drawinstance()
+  basket.dialogue:textDraw(player)
   map:drawLayer(map.layers["Foreground"])
 end
 
