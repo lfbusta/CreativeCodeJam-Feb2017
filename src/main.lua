@@ -9,8 +9,8 @@ local world = bump.newWorld()
 local worldWidth = love.graphics.getWidth()
 local worldHeight = love.graphics.getHeight()
 
-local playerX = 160
-local playerY = 360
+local playerX = 80
+local playerY = 80
 local playerspeed = 80
 
 local scale = 2
@@ -29,7 +29,7 @@ function love.load()
 	map = STI.new("res/maps/coop_level.lua", {"box2d"})
   collisions(world,room,map,tilelength)
 
-  local booboo = love.graphics.newImage("res/maps/images/booboosheet.png")
+  local booboo = love.graphics.newImage("res/sprites/booboosheet.png")
   booboo:setFilter( 'nearest', 'nearest' )    --Scales image so that pixels are sharp
   player = player:new(booboo,playerspeed,playerX,playerY,18,28,8,4)		--instatiates booboo sprite
 
@@ -92,7 +92,7 @@ end
 
 function love.draw()
   love.graphics.scale(scale)
-	love.graphics.translate( (worldWidth/4 - player.x), (worldHeight/4 - player.y) )
+--	love.graphics.translate( (worldWidth/4 - player.x), (worldHeight/4 - player.y) )
   -- Draw world
   map:draw()
   map:setDrawRange(5, 5, 256, 256)
